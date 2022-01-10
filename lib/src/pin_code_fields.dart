@@ -1,7 +1,7 @@
 part of pin_code_fields;
 
 /// Pin code text fields which automatically changes focus and validates
-class PinCodeTextField extends StatefulWidget with CodeAutoFill{
+class PinCodeTextField extends StatefulWidget with CodeAutoFill {
   /// The [BuildContext] of the application
   final BuildContext appContext;
 
@@ -308,6 +308,8 @@ class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProvider
     //       "IF YOU WANT TO USE COLOR FILL FOR EACH CELL THEN SET enableActiveFill = true");
     // }
 
+    listenForCode();
+
     _checkForInvalidValues();
     _assignController();
     if (_pinTheme.shape != PinCodeFieldShape.circle && _pinTheme.shape != PinCodeFieldShape.underline) {
@@ -360,6 +362,10 @@ class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProvider
     // If a default value is set in the TextEditingController, then set to UI
     if (_textEditingController!.text.isNotEmpty) _setTextToInput(_textEditingController!.text);
     super.initState();
+  }
+
+  void listenForCode() async {
+    await SmsAutoFill().listenForCode();
   }
 
   // validating all the values
