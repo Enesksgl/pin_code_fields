@@ -1,7 +1,7 @@
 part of pin_code_fields;
 
 /// Pin code text fields which automatically changes focus and validates
-class PinCodeTextField extends StatefulWidget {
+class PinCodeTextField extends StatefulWidget with CodeAutoFill{
   /// The [BuildContext] of the application
   final BuildContext appContext;
 
@@ -247,6 +247,11 @@ class PinCodeTextField extends StatefulWidget {
 
   @override
   _PinCodeTextFieldState createState() => _PinCodeTextFieldState();
+
+  @override
+  void codeUpdated() {
+    // TODO: implement codeUpdated
+  }
 }
 
 class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProviderStateMixin {
