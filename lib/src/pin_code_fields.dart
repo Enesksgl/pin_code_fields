@@ -251,6 +251,7 @@ class PinCodeTextField extends StatefulWidget with CodeAutoFill {
   @override
   void codeUpdated() {
     // TODO: implement codeUpdated
+    controller!.text = code!;
   }
 }
 
