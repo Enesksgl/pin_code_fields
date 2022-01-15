@@ -252,6 +252,8 @@ class PinCodeTextField extends StatefulWidget with CodeAutoFill {
   void codeUpdated() {
     // TODO: implement codeUpdated
     controller!.text = code!;
+    onCompleted!;
+
   }
 }
 
@@ -309,7 +311,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProvider
     //       "IF YOU WANT TO USE COLOR FILL FOR EACH CELL THEN SET enableActiveFill = true");
     // }
 
-    listenForCode();
+
 
     _checkForInvalidValues();
     _assignController();
@@ -365,9 +367,6 @@ class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProvider
     super.initState();
   }
 
-  void listenForCode() async {
-    await SmsAutoFill().listenForCode();
-  }
 
   // validating all the values
   void _checkForInvalidValues() {
