@@ -1,7 +1,7 @@
 part of pin_code_fields;
 
 /// Pin code text fields which automatically changes focus and validates
-class PinCodeTextField extends StatefulWidget{
+class PinCodeTextField extends StatefulWidget with CodeAutoFill{
   /// The [BuildContext] of the application
   final BuildContext appContext;
 
@@ -245,13 +245,17 @@ class PinCodeTextField extends StatefulWidget{
   })  : assert(obscuringCharacter.isNotEmpty),
         super(key: key);
 
+  void codeUpdated() {
+    controller!.text = code!;
+    onCompleted!(code!);
+  }
   @override
   _PinCodeTextFieldState createState() => _PinCodeTextFieldState();
 
 
 }
 
-class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProviderStateMixin,CodeAutoFill {
+class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProviderStateMixin{
   TextEditingController? _textEditingController;
   FocusNode? _focusNode;
   late List<String> _inputList;
@@ -298,11 +302,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField> with TickerProvider
 
   bool get _hintAvailable => widget.hintCharacter != null;
   @override
-  void codeUpdated() {
-    // TODO: implement codeUpdated
-    _textEditingController!.text = code!;
-    widget.onCompleted!;
-  }
+
 
   @override
   void initState() {
